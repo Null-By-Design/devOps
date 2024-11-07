@@ -16,7 +16,7 @@ spec:
       metadata:
         generateName: cd-pipeline-run-
       spec:
-        serviceAccountName: default
+        serviceAccountName: pipeline
         
         pipelineRef:
           name: cd-pipeline

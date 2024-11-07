@@ -1,28 +1,28 @@
 apiVersion: rbac.authorization.k8s.io/v1
-kind: Role
+kind: ClusterRole
 metadata:
-  namespace: default
-  name: interceptor-role
+  # Give the ClusterRole a name
+  name: tekton-pipeline-reader
 rules:
   - apiGroups: ["triggers.tekton.dev"]
-    resources: ["interceptors"]
-    verbs: ["get", "list", "watch",  "create", "update", "delete"]
+    resources: ["triggers", "triggerbindings", "triggertemplates", "clustertriggerbindings", "clusterinterceptors", "eventlisteners"]
+    verbs: ["list", "watch"]
 
 
 ---
 apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
+kind: ClusterRoleBinding
 metadata:
-  name: interceptor-rolebinding
-  namespace: default
+  name: pipeline-sa-tekton-access
 subjects:
   - kind: ServiceAccount
     name: pipeline-sa
     namespace: default
 roleRef:
-  kind: Role
-  name: interceptor-role
+  kind: ClusterRole
+  name: tekton-pipeline-reader
   apiGroup: rbac.authorization.k8s.io
+
 
 
 
