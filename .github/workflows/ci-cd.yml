@@ -2,9 +2,11 @@
 
 on:
   push:
-    branches: [ "master" ] # Trigger on pushes to the main branch
+    branches: [ "master" ]
   pull_request:
-    branches: [ "master" ] # Trigger on pull requests to the main branch
+    branches: [ "master" ]
+  repository_dispatch:
+    types: [user-service-pr]
 
 jobs:
   build:
